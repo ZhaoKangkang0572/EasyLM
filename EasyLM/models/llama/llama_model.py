@@ -62,7 +62,7 @@ LLAMA_STANDARD_CONFIGS = {
         'tie_word_embeddings': False,
     },
     '7b': {
-        'vocab_size': 32000,
+        'vocab_size': 75000,
         'hidden_size': 4096,
         'intermediate_size': 11008,
         'num_hidden_layers': 32,
@@ -170,7 +170,7 @@ class LLaMAConfig(PretrainedConfig):
 
     def __init__(
         self,
-        vocab_size=32000,
+        vocab_size=75000,
         hidden_size=4096,
         intermediate_size=11008,
         num_hidden_layers=32,
