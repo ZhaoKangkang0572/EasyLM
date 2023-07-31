@@ -50,7 +50,7 @@ python -m EasyLM.models.llama.llama_train \
     --train_dataset.json_dataset.seq_length=4096 \
     --train_dataset.json_dataset.batch_size=32 \
     --train_dataset.json_dataset.tokenizer_processes=16 \
-    --checkpointer.save_optimizer_state=True \
+    --checkpointer.save_optimizer_state=False \
     --logger.online=True \
     --logger.prefix='EasyLM' \
     --logger.project="llama2_13b_pretrain" \
