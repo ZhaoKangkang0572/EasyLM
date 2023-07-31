@@ -10,6 +10,9 @@ export WANDB_API_KEY='8d90ffa40a01a3bb4700d686b7821fdccda82631'
 
 # TPU specific flags to improve training throughput
 # export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_tpu_spmd_rewrite_einsum_with_reshape=true --xla_enable_async_all_gather=true --jax_enable_async_collective_offload=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
+easylm_dir="/opt/ml/EasyLM"
+export PYTHONPATH="${easylm_dir}:$PYTHONPATH"
+echo "The current PYTHONPATH is: $PYTHONPATH"
 
 mkdir data_train
 chmod +x /s5cmd
