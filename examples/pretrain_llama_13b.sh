@@ -11,9 +11,14 @@ export WANDB_API_KEY='8d90ffa40a01a3bb4700d686b7821fdccda82631'
 # TPU specific flags to improve training throughput
 # export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_tpu_spmd_rewrite_einsum_with_reshape=true --xla_enable_async_all_gather=true --jax_enable_async_collective_offload=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
-
+mkdir data_train
 chmod +x /s5cmd
 /s5cmd sync s3://pretrained/llama2/* /
+
+/s5cmd sync s3://pretrained/data/train/* /data_train/
+
+
+/s5cmd sync s3://pretrained/data/test/* /data_train/
 
 mkdir /train_logs
 mkdir /train_logs/checkpoint
@@ -38,7 +43,7 @@ python -m EasyLM.models.llama.llama_train \
     --optimizer.adamw_optimizer.lr_decay_steps=250000 \
     --train_dataset.type='json' \
     --train_dataset.text_processor.fields='text' \
-    --train_dataset.json_dataset.path='/opt/ml/input/data/trainx' \
+    --train_dataset.json_dataset.path='/data_train/train' \
     --train_dataset.json_dataset.seq_length=4096 \
     --train_dataset.json_dataset.batch_size=32 \
     --train_dataset.json_dataset.tokenizer_processes=16 \
